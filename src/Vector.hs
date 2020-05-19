@@ -1,7 +1,9 @@
-module Vector (Vector,Vector.sum, average, movingAverage, dotProduct) where
+module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct) where
 
 type Vector = [Double]
-sum = undefined
+type Scalar = Double
+sum :: Vector -> Scalar
+sum _ = 0
 product = undefined
 average = undefined
 movingAverage = undefined

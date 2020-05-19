@@ -3,7 +3,7 @@
  import Vector
  import Test.Hspec
 
- sumTest :: (String,Vector.Vector,Double) -> Spec
+ sumTest :: (String,Vector,Scalar) -> Spec
  sumTest (name,elements, result) =
      it name $ do
        Vector.sum(elements) `shouldBe` result
