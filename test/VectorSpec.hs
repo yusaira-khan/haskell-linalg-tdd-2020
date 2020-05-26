@@ -12,6 +12,7 @@
    do
    describe "Sum" $ do
      sumTest ("zero",[],0)
+     sumTest ("one",[6],6)
  spec :: Spec
  spec = do
    sumTestAll

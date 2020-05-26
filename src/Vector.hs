@@ -3,7 +3,8 @@ module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct) whe
 type Vector = [Double]
 type Scalar = Double
 sum :: Vector -> Scalar
-sum _ = 0
+sum [] = 0
+sum x:xs = x
 product = undefined
 average = undefined
 movingAverage = undefined
