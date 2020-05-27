@@ -4,7 +4,7 @@ type Vector = [Double]
 type Scalar = Double
 sum :: Vector -> Scalar
 sum [] = 0
-sum x:xs = x
+sum (x:xs) = x + (Vector.sum xs)
 product = undefined
 average = undefined
 movingAverage = undefined
