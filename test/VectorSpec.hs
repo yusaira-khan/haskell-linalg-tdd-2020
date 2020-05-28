@@ -21,6 +21,18 @@
      sumTest [("zero",[],0),
       ("one",[6],6),
       ("two",[6,7],13)]
+
+ avgTest :: (String,Vector,Scalar) -> Spec
+ avgTest (name,elements, result) =
+     it name $ do
+       Vector.average(elements) `shouldBe` result
+ avgTestAll :: Spec
+ avgTestAll =
+    testAll "Average"
+     avgTest [("zero",[],0),
+      ("one",[6],6),
+      ("two",[6,7],6.5)]
  spec :: Spec
  spec = do
    sumTestAll
+   avgTestAll
