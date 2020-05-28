@@ -10,11 +10,11 @@ average' :: Vector -> Scalar
 average' [] = 0
 average' x= (Vector.sum x)/(fromIntegral $ length x)
 divSum :: Scalar -> Vector -> Scalar
-divSum 0.0 _ = undefined
 divSum _ [] = 0
+divSum 0.0 _ = undefined
 divSum l (x:xs) = (x/l) + (divSum l xs)
 average'' :: Vector -> Scalar
 average'' l = divSum (fromIntegral $ length l) l
-average = average'
+average = average''
 movingAverage = undefined
 dotProduct = undefined
