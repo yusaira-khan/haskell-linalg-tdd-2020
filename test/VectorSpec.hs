@@ -32,7 +32,19 @@
      avgTest [("zero",[],0),
       ("one",[6],6),
       ("two",[6,7],6.5)]
+ movAvgTest :: (String,Int,Vector,Vector) -> Spec
+ movAvgTest (name,window,elements, result) =
+     it name $ do
+       (Vector.movingAverage window elements) `shouldBe` result
+ movAvgTestAll :: Spec
+ movAvgTestAll =
+    testAll "MovingAverage"
+     movAvgTest [("zero array", 5,[],[]),
+      ("zero window",0,[6],[]),
+      ("one same",1,[6],[6]),
+      ("one window",1,[6,7],[6,7])]
  spec :: Spec
  spec = do
    sumTestAll
    avgTestAll
+   movAvgTestAll
