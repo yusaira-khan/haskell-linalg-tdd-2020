@@ -18,5 +18,8 @@ average'' l = divSum (fromIntegral $ length l) l
 average = average''
 movingAverage _ [] =  []
 movingAverage 0 _ =  []
-movingAverage w (x:xs) = x : movingAverage w xs
+movingAverage w (x:xs) =
+  let
+    currAv = x
+  in currAv : movingAverage w xs
 dotProduct = undefined

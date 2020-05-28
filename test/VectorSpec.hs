@@ -42,7 +42,8 @@
      movAvgTest [("zero array", 5,[],[]),
       ("zero window",0,[6],[]),
       ("one same",1,[6],[6]),
-      ("one window",1,[6,7],[6,7])]
+      ("one window",1,[6,7],[6,7]),
+      ("two window",2,[6,7],[6,6.5])]
  spec :: Spec
  spec = do
    sumTestAll
