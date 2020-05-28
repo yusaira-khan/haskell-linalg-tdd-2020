@@ -16,5 +16,7 @@ divSum l (x:xs) = (x/l) + (divSum l xs)
 average'' :: Vector -> Scalar
 average'' l = divSum (fromIntegral $ length l) l
 average = average''
-movingAverage = undefined
+movingAverage _ [] =  []
+movingAverage 0 _ =  []
+movingAverage w (x:xs) = x : movingAverage w xs
 dotProduct = undefined
