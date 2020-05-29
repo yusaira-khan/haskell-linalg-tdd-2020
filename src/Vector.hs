@@ -1,4 +1,4 @@
-module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct) where
+module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct,kalmanfilter) where
 
 type Vector = [Double]
 type Scalar = Double
@@ -44,3 +44,5 @@ movingAverage window elements =
      startingWindow = if window < 1 then 0 else 1
   in incMovingAverage startingWindow elements
 dotProduct = undefined
+
+kalmanfilter  = undefined
