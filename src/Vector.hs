@@ -22,16 +22,25 @@ movingAverage window elements =
      incMovingAverage 0 _ =  []
      incMovingAverage currWindow currElements =
        let
-         maxWindow = window
-          --  if (window > length currElements)
-          --  then length currElements
-          --  else window
-         -- currWindow =if currWindow < mah
-         avElements = [head currElements]
+         maxWindow =
+           if (window > length currElements)
+           then length currElements
+           else window
+         avWindow =
+           if currWindow < maxWindow
+           then currWindow
+           else maxWindow
+         avElements = take avWindow currElements
          av = average avElements
-         nextWindow = currWindow
-         nextElements = tail currElements
+         nextWindow =
+           if currWindow < maxWindow
+           then currWindow+1
+           else maxWindow
+         nextElements =
+           if currWindow < maxWindow
+           then currElements
+           else tail currElements
        in av : (incMovingAverage nextWindow nextElements)
-     startingWindow = window
+     startingWindow = if window < 1 then 0 else 1
   in incMovingAverage startingWindow elements
 dotProduct = undefined
