@@ -16,11 +16,15 @@ divSum l (x:xs) = (x/l) + (divSum l xs)
 average'' :: Vector -> Scalar
 average'' l = divSum (fromIntegral $ length l) l
 average = average''
+movingAverage :: Int -> Vector -> Vector
 movingAverage _ [] =  []
 movingAverage 0 _ =  []
-movingAverage w xl@(x:xs) =
+movingAverage w (x:xs) =
   let
-    currList = [x]
-    currAv = average currList
-  in currAv : movingAverage w xs
+    currWindow = w
+    currElements = [x]
+    currAv = average currElements
+    nextWindow = w
+    nextElements = xs
+  in currAv : (movingAverage nextWindow nextElements)
 dotProduct = undefined
