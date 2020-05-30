@@ -41,7 +41,7 @@
  dotTest :: (String,Vector,Vector,Scalar) -> Spec
  dotTest (name,v1,v2, result) =
      it name $ do
-       Vector.dotProduct(v1,v2) `shouldBe` result
+       (Vector.dotProduct v1 v2) `shouldBe` result
  dotTestWorkingAll :: Spec
  dotTestWorkingAll =
     testAll "Dot Product"
@@ -54,3 +54,4 @@
    sumTestAll
    avgTestAll
    movAvgTestAll
+   dotTestWorkingAll

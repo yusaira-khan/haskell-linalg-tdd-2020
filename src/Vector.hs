@@ -43,6 +43,6 @@ movingAverage window elements =
        in av : (incMovingAverage nextWindow nextElements)
      startingWindow = if window < 1 then 0 else 1
   in incMovingAverage startingWindow elements
-dotProduct = undefined
+dotProduct _ _  = 0
 
 kalmanfilter  = undefined
