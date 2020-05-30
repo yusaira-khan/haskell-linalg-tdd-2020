@@ -38,6 +38,16 @@
       ("one window",1,[6,7],[6,7]),
       ("two window",2,[6,7],[6.0,6.5, 7]),
       ("extra window",5,[6,7],[6.0,6.5, 7])]
+ dotTest :: (String,Vector,Vector,Scalar) -> Spec
+ dotTest (name,v1,v2, result) =
+     it name $ do
+       Vector.sum(elements) `shouldBe` result
+ dotTestAll :: Spec
+ dotTestAll =
+    testAll "Dot Product"
+     dotTest [("zero",[],[],0),
+      ("one",[6],[1],6),
+      ("two",[6,7],13)]
  spec :: Spec
  spec = do
    sumTestAll
