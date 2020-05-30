@@ -1,8 +1,8 @@
  module VectorSpec (spec) where
 
  import Vector
- import Test.Hspec
  import TestHelper
+ import Test.Hspec
 
  sumTest :: (String,Vector,Scalar) -> Spec
  sumTest (name,elements, result) =
@@ -41,13 +41,14 @@
  dotTest :: (String,Vector,Vector,Scalar) -> Spec
  dotTest (name,v1,v2, result) =
      it name $ do
-       Vector.sum(elements) `shouldBe` result
- dotTestAll :: Spec
- dotTestAll =
+       Vector.dotProduct(v1,v2) `shouldBe` result
+ dotTestWorkingAll :: Spec
+ dotTestWorkingAll =
     testAll "Dot Product"
-     dotTest [("zero",[],[],0),
-      ("one",[6],[1],6),
-      ("two",[6,7],13)]
+     dotTest [("zero",[],[],0)
+      ,("one",[6],[2],12)
+      ,("two",[6,7],[2,3],33)
+      ]
  spec :: Spec
  spec = do
    sumTestAll
