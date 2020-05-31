@@ -1,5 +1,5 @@
 module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct,kalmanfilter) where
-
+import Control.Exception(ArithException)
 type Vector = [Double]
 type Scalar = Double
 sum :: Vector -> Scalar
@@ -43,6 +43,10 @@ movingAverage window elements =
        in av : (incMovingAverage nextWindow nextElements)
      startingWindow = if window < 1 then 0 else 1
   in incMovingAverage startingWindow elements
-dotProduct _ _  = 0
+dotProduct :: Vector -> Vector -> Scalar
+dotProduct [] []  = 0
+dotProduct [] _   = error "incompatible uneven vectors"
+dotProduct v [] = dotProduct [] v
+dotProduct (v1:vs1) (v2:vs2)  = 0
 
 kalmanfilter  = undefined

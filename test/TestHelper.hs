@@ -1,5 +1,6 @@
 module TestHelper(testAll) where
 import Test.Hspec
+import Control.Exception(evaluate)
 
 testList ::  (a ->  Spec ) -> [a] -> Spec
 testList f (t:[]) = f t
