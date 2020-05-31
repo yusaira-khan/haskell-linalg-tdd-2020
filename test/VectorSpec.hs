@@ -55,7 +55,7 @@ dotTestWorkingAll =
       ,("one",[6],[2],12)
       ,("two",[6,7],[2,3],33)
       ] >> testAll "Dot Product error" dotTestError [
-  ([],[1]),([1],[])
+  ([],[1]),([1],[]),([2,1],[1]),([2],[2,1])
                                                     ]
 spec :: Spec
 spec = do

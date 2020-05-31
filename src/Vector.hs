@@ -1,4 +1,4 @@
-module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct,kalmanfilter) where
+module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct) where
 import Control.Exception(ArithException)
 type Vector = [Double]
 type Scalar = Double
@@ -47,6 +47,5 @@ dotProduct :: Vector -> Vector -> Scalar
 dotProduct [] []  = 0
 dotProduct [] _   = error "incompatible uneven vectors"
 dotProduct v [] = dotProduct [] v
-dotProduct (v1:vs1) (v2:vs2)  = 0
+dotProduct (v1:vs1) (v2:vs2)  = v1*v2 + dotProduct vs1 vs2
 
-kalmanfilter  = undefined
