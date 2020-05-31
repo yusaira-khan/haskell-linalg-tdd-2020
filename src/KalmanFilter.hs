@@ -1,4 +1,4 @@
-module KalmanFilter (KalmanFilter,KalmanFilter.init,update, adjust) where
+module KalmanFilter (KalmanFilter,setFilterAndAdjustData) where
 import Vector
 data KalmanFilter = KalmanFilter {  r::Scalar -- R
  , p::Scalar -- P
@@ -12,6 +12,12 @@ init iq ir = KalmanFilter {
   p=0,
   x=0
   }
+set ip ix k = KalmanFilter{
+  q = q k,
+  r = r k,
+  p = ip,
+  x = ix
+}
 update :: KalmanFilter -> Scalar -> KalmanFilter
 update kal ix =
   let
@@ -20,30 +26,37 @@ update kal ix =
    pp = p kal
    px = x kal
    tp = pp + pq
-   tk = pp/(pp+pr)
+   tk = tp/(tp+pr)
    nx = px + tk * (ix -px)
    np = (1-tk)*tp
   in KalmanFilter{r= pr, q=pq, p=np, x=nx}
 
-adjustLeft :: Scalar -> (KalmanFilter,Vector)-> (KalmanFilter,Vector)
-adjustLeft l (pk,px )=
+adjustLeft :: (KalmanFilter,Vector) -> Scalar -> (KalmanFilter,Vector)
+adjustLeft (pk,px ) l =
   let
    nk = update pk l
    nx = x nk
   in (nk,px++[nx])
-adjustRight :: (KalmanFilter,Vector)-> Scalar -> (KalmanFilter,Vector)
-adjustRight (pk,px) l =
+adjustRight :: Scalar -> (KalmanFilter,Vector) -> (KalmanFilter,Vector)
+adjustRight l (pk,px)  =
   let
    nk = update pk l
    nx = x nk
   in (nk,nx:px)
-adjust :: Scalar -> Scalar -> Vector  -> Vector
-adjust iq ir d =
+adjustData :: KalmanFilter -> Vector  -> Vector
+adjustData k d =
   let
-    k = KalmanFilter.init iq ir
-    ndlz = foldl adjustLeft (k,[]) d
-    ndrz = foldr adjustRight (k,[]) d
-    (_,l)  = snd ndlz
-    (_,r) = snd ndrz
+    e = [] :: Vector
+    ndlz = (foldl adjustLeft (k,e) d) :: (KalmanFilter,Vector)
+    ndrz = (foldr adjustRight (k,e) d) :: (KalmanFilter,Vector)
+    l  = snd ndlz
+    r = snd ndrz
   in l
 
+
+setFilterAndAdjustData :: Scalar -> Scalar -> Scalar -> Vector -> Vector
+setFilterAndAdjustData ip iq ir d =
+  let
+    k = KalmanFilter.init iq ir
+    k2= set ip (head d) k
+  in adjustData k2 d
