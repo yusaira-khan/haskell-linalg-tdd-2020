@@ -42,7 +42,10 @@ movingAverage window elements =
            else tail currElements
        in av : (incMovingAverage nextWindow nextElements)
      startingWindow = if window < 1 then 0 else 1
-  in incMovingAverage startingWindow elements
+     averaged = incMovingAverage startingWindow elements
+     endingIndex = length elements
+     returning = take endingIndex averaged
+ in returning
 dotProduct :: Vector -> Vector -> Scalar
 dotProduct [] []  = 0
 dotProduct [] _   = error "incompatible uneven vectors"
