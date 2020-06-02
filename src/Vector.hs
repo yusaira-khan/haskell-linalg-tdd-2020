@@ -52,13 +52,15 @@ dotProduct v [] = dotProduct [] v
 dotProduct (v1:vs1) (v2:vs2)  = v1*v2 + dotProduct vs1 vs2
 
 subtract :: Vector -> Vector -> Vector
-subtract [] []  = []
-subtract [] _   = error "incompatible uneven vectors"
-subtract v [] = Vector.subtract [] v
-subtract (v1:vs1) (v2:vs2)  = (v1-v2): (Vector.subtract vs1 vs2)
+subtract = elementwise (-) (:)
 
 add :: Vector -> Vector -> Vector
-add [] []  = []
-add [] _   = error "incompatible uneven vectors"
-add v [] = Vector.add [] v
-add (v1:vs1) (v2:vs2)  = (v1+v2): (Vector.add vs1 vs2)
+add = elementwise (+) (:)
+
+
+elementwise toEach betweenEach =
+  let op [] [] = []
+      op [] _  = error "incompatible uneven vectors"
+      op v  [] = op [] v
+      op (v1:vs1) (v2:vs2) = (toEach v1 v2) `betweenEach` (op vs1 vs2)
+  in op
