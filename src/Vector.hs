@@ -1,5 +1,4 @@
-module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct) where
-import Control.Exception(ArithException)
+module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct, Vector.add, Vector.subtract) where
 type Vector = [Double]
 type Scalar = Double
 sum :: Vector -> Scalar
@@ -52,3 +51,14 @@ dotProduct [] _   = error "incompatible uneven vectors"
 dotProduct v [] = dotProduct [] v
 dotProduct (v1:vs1) (v2:vs2)  = v1*v2 + dotProduct vs1 vs2
 
+subtract :: Vector -> Vector -> Vector
+subtract [] []  = []
+subtract [] _   = error "incompatible uneven vectors"
+subtract v [] = Vector.subtract [] v
+subtract (v1:vs1) (v2:vs2)  = (v1-v2): (Vector.subtract vs1 vs2)
+
+add :: Vector -> Vector -> Vector
+add [] []  = []
+add [] _   = error "incompatible uneven vectors"
+add v [] = Vector.add [] v
+add (v1:vs1) (v2:vs2)  = (v1+v2): (Vector.add vs1 vs2)

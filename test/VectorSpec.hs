@@ -54,12 +54,45 @@ dotTestWorkingAll =
      dotTest [("zero",[],[],0)
       ,("one",[6],[2],12)
       ,("two",[6,7],[2,3],33)
-      ] >> testAll "Dot Product error" dotTestError [
-  ([],[1]),([1],[]),([2,1],[1]),([2],[2,1])
-                                                    ]
+      ] >> testAll "Dot Product error" dotTestError [([],[1]),([1],[]),([2,1],[1]),([2],[2,1])]
+subTest :: (String,Vector,Vector,Vector) -> Spec
+subTest (name,v1,v2, result) =
+      it name $ do
+        (Vector.subtract v1 v2) `shouldBe` result
+subErrorName:: (Vector,Vector)-> String
+subErrorName (v1,v2) ="sub bad "++ (show $length v1) ++ " and "++(show $length v2)
+subTestError :: (Vector,Vector) -> Spec
+subTestError (v1,v2) =
+     it (subErrorName(v1,v2))$ (evaluate (Vector.subtract v1 v2) )`shouldThrow` errorCall "incompatible uneven vectors"
+subTestWorkingAll :: Spec
+subTestWorkingAll =
+     testAll "Subtraction"
+      subTest [("zero",[],[],[])
+       ,("one",[6],[2],[4])
+       ,("two",[6,1],[2,3],[4,-2])
+       ] >> testAll "sub error" subTestError [([],[1]),([1],[])]
+addTest :: (String,Vector,Vector,Vector) -> Spec
+addTest (name,v1,v2, result) =
+      it name $ do
+        (Vector.add v1 v2) `shouldBe` result
+addErrorName:: (Vector,Vector)-> String
+addErrorName (v1,v2) ="add bad "++ (show $length v1) ++ " and "++(show $length v2)
+addTestError :: (Vector,Vector) -> Spec
+addTestError (v1,v2) =
+     it (addErrorName(v1,v2))$ (evaluate (Vector.add v1 v2) )`shouldThrow` errorCall "incompatible uneven vectors"
+addTestWorkingAll :: Spec
+addTestWorkingAll =
+     testAll "add"
+      addTest [("zero",[],[],[])
+       ,("one",[6],[2],[8])
+       ,("two",[6,1],[2,3],[8,4])
+       ] >> testAll "add error" addTestError [
+   ([],[1]),([1],[])] -- these work but show bad error ([2,1],[1]),([2],[2,1])]
 spec :: Spec
 spec = do
    sumTestAll
    avgTestAll
    movAvgTestAll
    dotTestWorkingAll
+   subTestWorkingAll
+   addTestWorkingAll
