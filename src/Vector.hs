@@ -46,20 +46,16 @@ movingAverage window elements =
      returning = take endingIndex averaged
  in returning
 dotProduct :: Vector -> Vector -> Scalar
-dotProduct [] []  = 0
-dotProduct [] _   = error "incompatible uneven vectors"
-dotProduct v [] = dotProduct [] v
-dotProduct (v1:vs1) (v2:vs2)  = v1*v2 + dotProduct vs1 vs2
+dotProduct = elementwise (*) (+) 0
 
 subtract :: Vector -> Vector -> Vector
-subtract = elementwise (-) (:)
+subtract = elementwise (-) (:) []
 
 add :: Vector -> Vector -> Vector
-add = elementwise (+) (:)
+add = elementwise (+) (:) []
 
-
-elementwise toEach betweenEach =
-  let op [] [] = []
+elementwise toEach betweenEach base =
+  let op [] [] = base
       op [] _  = error "incompatible uneven vectors"
       op v  [] = op [] v
       op (v1:vs1) (v2:vs2) = (toEach v1 v2) `betweenEach` (op vs1 vs2)
