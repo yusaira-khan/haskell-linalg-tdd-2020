@@ -10,9 +10,12 @@ convTest (name,v1, v2, r) =
 convTestAll :: Spec
 convTestAll =
     testAll "conv"
-     convTest [("zero_zero",[],[],[])
-              ,("zero_notzero",[1],[],[])
-              ,("notzero_zero",[],[1],[])
+     convTest [("zero zero",[],[],[])
+              ,("zero notzero",[1],[],[])
+              ,("notzero zero",[],[1],[])
+              ,("one one",[5],[3],[15])
+              ,("one two",[5],[1,2],[5,10])
+              ,("two two",[3,5],[1,2],[3,11,10])
 
       ]
 spec :: Spec
