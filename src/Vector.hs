@@ -66,4 +66,4 @@ elementwise toEach betweenEach base =
 
 conv [] _ = []
 conv _ [] = []
-conv (a:ar) (b:br) = [a*b]
+conv al@(a:ar) bl@(b:br) = a*b:(conv al br)
