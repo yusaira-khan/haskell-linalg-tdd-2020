@@ -10,9 +10,9 @@ convTest (name,elements, result) =
 convTestAll :: Spec
 convTestAll =
     testAll "conv"
-     convTest [("zero",[],0),
-      ("one",[6],6),
-      ("two",[6,7],13)]
+     convTest [("zero",[],0)
+
+      ]
 spec :: Spec
 spec = do
    convTestAll

@@ -1,4 +1,4 @@
-module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct, Vector.add, Vector.subtract) where
+module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct, Vector.add, Vector.subtract,conv) where
 type Vector = [Double]
 type Scalar = Double
 sum :: Vector -> Scalar
@@ -54,9 +54,14 @@ subtract = elementwise (-) (:) []
 add :: Vector -> Vector -> Vector
 add = elementwise (+) (:) []
 
+mul :: Vector -> Vector -> Vector
+mul = elementwise (*) (:) []
+
 elementwise toEach betweenEach base =
   let op [] [] = base
       op [] _  = error "incompatible uneven vectors"
       op v  [] = op [] v
       op (v1:vs1) (v2:vs2) = (toEach v1 v2) `betweenEach` (op vs1 vs2)
   in op
+
+conv = undefined
