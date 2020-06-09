@@ -2,12 +2,13 @@ module DataGenSpec(spec)
 where
 import TestHelper
 import DataGen.Data
+import Vector
 import Test.Hspec
 
-kalTest ::(Show a,Eq a)  => (String,[a]) -> Spec
+kalTest :: (String,Vector) -> Spec
 kalTest (name, hey) =
     it name $ do
-       hey `shouldBe` []
+       hey `shouldBe`  (movingAverage 2 hey)
 kalTestWorkingAll :: Spec
 kalTestWorkingAll =
    testAll "Kalman"
