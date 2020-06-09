@@ -3,14 +3,16 @@ import Vector
 import TestHelper
 import Test.Hspec
 import Control.Exception(evaluate)
-convTest :: (String,Vector,Scalar) -> Spec
-convTest (name,elements, result) =
+convTest :: (String,Vector,Vector,Vector) -> Spec
+convTest (name,v1, v2, r) =
      it name $ do
-       Vector.conv(elements,[0]) `shouldBe` result
+       (Vector.conv v1 v2) `shouldBe` r
 convTestAll :: Spec
 convTestAll =
     testAll "conv"
-     convTest [("zero",[],0)
+     convTest [("zero_zero",[],[],[])
+              ,("zero_notzero",[1],[],[])
+              ,("notzero_zero",[],[1],[])
 
       ]
 spec :: Spec

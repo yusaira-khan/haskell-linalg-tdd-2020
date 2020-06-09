@@ -64,4 +64,5 @@ elementwise toEach betweenEach base =
       op (v1:vs1) (v2:vs2) = (toEach v1 v2) `betweenEach` (op vs1 vs2)
   in op
 
-conv = undefined
+conv [] _ = []
+conv _ [] = []
