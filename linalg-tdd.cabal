@@ -22,6 +22,7 @@ library
   other-modules:       DataGen.Small
                      , DataGen.DemoFileSamples
                      , DataGen.DemoPlottingSamples
+                     , DataGen.Kalman
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
 

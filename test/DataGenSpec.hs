@@ -8,7 +8,7 @@ import Test.Hspec
 kalTest :: (String,Vector) -> Spec
 kalTest (name, hey) =
     it name $ do
-       hey `shouldBe`  (movingAverage 2 hey)
+       hey `shouldBe`  (DataGen.Data.useGivenKalman hey)
 kalTestWorkingAll :: Spec
 kalTestWorkingAll =
    testAll "Kalman"

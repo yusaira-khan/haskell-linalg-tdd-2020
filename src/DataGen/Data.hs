@@ -1,4 +1,4 @@
-module DataGen.Data(samples,DataGen.Kalman.givenKalman) where
+module DataGen.Data(samples,DataGen.Kalman.useGivenKalman) where
 import qualified DataGen.DemoFileSamples
 import qualified DataGen.DemoPlottingSamples
 import qualified DataGen.Small

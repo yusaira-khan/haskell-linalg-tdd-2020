@@ -1,5 +1,5 @@
-module DataGen.Kalman(givenKalman) where
+module DataGen.Kalman(useGivenKalman) where
 
 import KalmanFilter
 
-givenKalman = KalmanFilter.setFilterAndAdjustData 0.1 0.1 0.1
+useGivenKalman = KalmanFilter.setFilterAndAdjustData 0.1 0.1 0.1
