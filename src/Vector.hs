@@ -1,4 +1,4 @@
-module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct, Vector.add, Vector.subtract,conv) where
+module Vector (Vector,Scalar,Vector.sum, average, movingAverage, dotProduct, Vector.add, Vector.subtract,conv,magnitude) where
 type Vector = [Double]
 type Scalar = Double
 sum :: Vector -> Scalar
@@ -63,6 +63,8 @@ elementwise toEach betweenEach base =
       op v  [] = op [] v
       op (v1:vs1) (v2:vs2) = (toEach v1 v2) `betweenEach` (op vs1 vs2)
   in op
+magnitude :: Vector -> Scalar
+magnitude x = dotProduct x x
 
 conv [] _ = []
 conv _ [] = []
